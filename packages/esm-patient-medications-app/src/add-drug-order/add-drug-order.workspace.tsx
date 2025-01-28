@@ -16,6 +16,7 @@ import styles from './add-drug-order.scss';
 
 export interface AddDrugOrderWorkspaceAdditionalProps {
   order: DrugOrderBasketItem;
+  shouldReturnToOrderBasket?: boolean;
 }
 
 export interface AddDrugOrderWorkspace extends DefaultPatientWorkspaceProps, AddDrugOrderWorkspaceAdditionalProps {}
@@ -25,6 +26,7 @@ export default function AddDrugOrderWorkspace({
   closeWorkspace,
   closeWorkspaceWithSavedChanges,
   promptBeforeClosing,
+  shouldReturnToOrderBasket,
 }: AddDrugOrderWorkspace) {
   const { t } = useTranslation();
   const isTablet = useLayoutType() === 'tablet';
@@ -34,10 +36,13 @@ export default function AddDrugOrderWorkspace({
 
   const cancelDrugOrder = useCallback(() => {
     closeWorkspace({
-      onWorkspaceClose: () => launchPatientWorkspace('order-basket'),
+      onWorkspaceClose: () =>
+        shouldReturnToOrderBasket === undefined || shouldReturnToOrderBasket
+          ? launchPatientWorkspace('order-basket')
+          : null,
       closeWorkspaceGroup: false,
     });
-  }, [closeWorkspace]);
+  }, [closeWorkspace, shouldReturnToOrderBasket]);
 
   const openOrderForm = useCallback(
     (searchResult: DrugOrderBasketItem) => {
@@ -68,10 +73,13 @@ export default function AddDrugOrderWorkspace({
       }
       setOrders(newOrders);
       closeWorkspaceWithSavedChanges({
-        onWorkspaceClose: () => launchPatientWorkspace('order-basket'),
+        onWorkspaceClose: () =>
+          shouldReturnToOrderBasket === undefined || shouldReturnToOrderBasket
+            ? launchPatientWorkspace('order-basket')
+            : null,
       });
     },
-    [orders, setOrders, closeWorkspaceWithSavedChanges, session.currentProvider.uuid],
+    [orders, setOrders, closeWorkspaceWithSavedChanges, session.currentProvider.uuid, shouldReturnToOrderBasket],
   );
 
   if (!currentOrder) {
@@ -90,7 +98,7 @@ export default function AddDrugOrderWorkspace({
             </Button>
           </div>
         )}
-        <DrugSearch openOrderForm={openOrderForm} />
+        <DrugSearch openOrderForm={openOrderForm} shouldReturnToOrderBasket={shouldReturnToOrderBasket} />
       </>
     );
   } else {

@@ -10,9 +10,10 @@ import styles from './order-basket-search.scss';
 
 export interface DrugSearchProps {
   openOrderForm: (searchResult: DrugOrderBasketItem) => void;
+  shouldReturnToOrderBasket: boolean;
 }
 
-export default function DrugSearch({ openOrderForm }: DrugSearchProps) {
+export default function DrugSearch({ openOrderForm, shouldReturnToOrderBasket }: DrugSearchProps) {
   const { t } = useTranslation();
   const isTablet = useLayoutType() === 'tablet';
   const [searchTerm, setSearchTerm] = useState('');
@@ -51,6 +52,7 @@ export default function DrugSearch({ openOrderForm }: DrugSearchProps) {
         searchTerm={debouncedSearchTerm}
         openOrderForm={openOrderForm}
         focusAndClearSearchInput={focusAndClearSearchInput}
+        shouldReturnToOrderBasket={shouldReturnToOrderBasket}
       />
       {isTablet && (
         <div className={styles.separatorContainer}>

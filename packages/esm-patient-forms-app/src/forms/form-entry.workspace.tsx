@@ -44,9 +44,9 @@ const FormEntry: React.FC<FormEntryComponentProps> = ({
         typeof mutateForm === 'function' && mutateForm();
         closeWorkspace();
       },
-      closeWorkspaceWithSavedChanges: () => {
+      closeWorkspaceWithSavedChanges: (data: any) => {
         typeof mutateForm === 'function' && mutateForm();
-        closeWorkspaceWithSavedChanges();
+        closeWorkspaceWithSavedChanges(data);
       },
       promptBeforeClosing,
       additionalProps,

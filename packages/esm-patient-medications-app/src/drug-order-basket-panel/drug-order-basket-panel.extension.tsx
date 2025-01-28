@@ -57,7 +57,7 @@ export default function DrugOrderBasketPanelExtension() {
   const openDrugSearch = () => {
     closeWorkspace('order-basket', {
       ignoreChanges: true,
-      onWorkspaceClose: () => launchPatientWorkspace('add-drug-order'),
+      onWorkspaceClose: () => launchPatientWorkspace('add-drug-order', { shouldReturnToOrderBasket: false }),
       closeWorkspaceGroup: false,
     });
   };

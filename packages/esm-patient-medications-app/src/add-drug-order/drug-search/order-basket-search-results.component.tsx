@@ -29,17 +29,20 @@ export interface OrderBasketSearchResultsProps {
   searchTerm: string;
   openOrderForm: (searchResult: DrugOrderBasketItem) => void;
   focusAndClearSearchInput: () => void;
+  shouldReturnToOrderBasket: boolean;
 }
 
 interface DrugSearchResultItemProps {
   drug: DrugSearchResult;
   openOrderForm: (searchResult: DrugOrderBasketItem) => void;
+  shouldReturnToOrderBasket?: boolean;
 }
 
 export default function OrderBasketSearchResults({
   searchTerm,
   openOrderForm,
   focusAndClearSearchInput,
+  shouldReturnToOrderBasket,
 }: OrderBasketSearchResultsProps) {
   const { t } = useTranslation();
   const isTablet = useLayoutType() === 'tablet';
@@ -105,13 +108,24 @@ export default function OrderBasketSearchResults({
         </Button>
       </div>
       <div className={styles.resultsContainer}>
-        {drugs?.map((drug) => <DrugSearchResultItem key={drug.uuid} drug={drug} openOrderForm={openOrderForm} />)}
+        {drugs?.map((drug) => (
+          <DrugSearchResultItem
+            key={drug.uuid}
+            drug={drug}
+            openOrderForm={openOrderForm}
+            shouldReturnToOrderBasket={shouldReturnToOrderBasket}
+          />
+        ))}
       </div>
     </div>
   );
 }
 
-const DrugSearchResultItem: React.FC<DrugSearchResultItemProps> = ({ drug, openOrderForm }) => {
+const DrugSearchResultItem: React.FC<DrugSearchResultItemProps> = ({
+  drug,
+  openOrderForm,
+  shouldReturnToOrderBasket,
+}) => {
   const isTablet = useLayoutType() === 'tablet';
   const { orders, setOrders } = useOrderBasket<DrugOrderBasketItem>('medications', prepMedicationOrderPostData);
   const { patientUuid } = usePatientChartStore();
@@ -147,10 +161,13 @@ const DrugSearchResultItem: React.FC<DrugSearchResultItemProps> = ({ drug, openO
       setOrders([...orders, searchResult]);
       closeWorkspace('add-drug-order', {
         ignoreChanges: true,
-        onWorkspaceClose: () => launchPatientWorkspace('order-basket'),
+        onWorkspaceClose: () =>
+          shouldReturnToOrderBasket === undefined || shouldReturnToOrderBasket
+            ? launchPatientWorkspace('order-basket')
+            : null,
       });
     },
-    [orders, setOrders],
+    [orders, setOrders, shouldReturnToOrderBasket],
   );
 
   const removeFromBasket = useCallback(
