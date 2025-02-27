@@ -1,9 +1,9 @@
 {
-  "name": "@openmrs/esm-patient-medications-app",
+  "name": "@csaude/esm-patient-medications-app",
   "version": "9.1.0",
   "license": "MPL-2.0",
   "description": "Patient medications microfrontend for the OpenMRS SPA",
-  "browser": "dist/openmrs-esm-patient-medications-app.js",
+  "browser": "dist/csaude-esm-patient-medications-app.js",
   "main": "src/index.ts",
   "source": true,
   "scripts": {
