@@ -5,7 +5,7 @@ import useFormSchema from '../hooks/useFormSchema';
 
 const mockUseFormSchema = jest.mocked(useFormSchema);
 
-jest.mock('@openmrs/esm-form-engine-lib', () => ({
+jest.mock('@csaude/esm-form-engine-lib', () => ({
   FormEngine: jest
     .fn()
     .mockImplementation(() => React.createElement('div', { 'data-testid': 'openmrs form' }, 'FORM ENGINE LIB')),
