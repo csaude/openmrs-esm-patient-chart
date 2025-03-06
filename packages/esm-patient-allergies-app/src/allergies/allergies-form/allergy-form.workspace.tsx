@@ -72,7 +72,8 @@ interface AllergyFormProps extends DefaultPatientWorkspaceProps {
 }
 
 function AllergyForm(props: AllergyFormProps) {
-  const { closeWorkspace, patientUuid, allergy, formContext, promptBeforeClosing } = props;
+  const { closeWorkspace, closeWorkspaceWithSavedChanges, patientUuid, allergy, formContext, promptBeforeClosing } =
+    props;
   const { t } = useTranslation();
   const { concepts } = useConfig();
   const isTablet = useLayoutType() === 'tablet';
@@ -264,6 +265,7 @@ function AllergyForm(props: AllergyFormProps) {
                 if (response.status === 201) {
                   mutate();
                   closeWorkspace({ ignoreChanges: true });
+                  closeWorkspaceWithSavedChanges(response.data);
                   showSnackbar({
                     isLowContrast: true,
                     kind: 'success',
