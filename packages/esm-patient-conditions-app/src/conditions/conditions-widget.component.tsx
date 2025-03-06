@@ -18,7 +18,13 @@ import {
 } from '@carbon/react';
 import { WarningFilled } from '@carbon/react/icons';
 import { useFormContext, Controller } from 'react-hook-form';
-import { showSnackbar, useDebounce, useSession, ResponsiveWrapper } from '@openmrs/esm-framework';
+import {
+  showSnackbar,
+  useDebounce,
+  useSession,
+  ResponsiveWrapper,
+  type CloseWorkspaceOptions,
+} from '@openmrs/esm-framework';
 import { type DefaultPatientWorkspaceProps } from '@openmrs/esm-patient-common-lib';
 import {
   type CodedCondition,
@@ -32,8 +38,12 @@ import {
 import { type ConditionsFormSchema } from './conditions-form.workspace';
 import styles from './conditions-form.scss';
 
+interface DataPatientWorkspaceProps extends DefaultPatientWorkspaceProps {
+  closeWorkspaceWithSavedChanges(data: any, closeWorkspaceOptions?: CloseWorkspaceOptions): void;
+}
+
 interface ConditionsWidgetProps {
-  closeWorkspaceWithSavedChanges?: DefaultPatientWorkspaceProps['closeWorkspaceWithSavedChanges'];
+  closeWorkspaceWithSavedChanges?: DataPatientWorkspaceProps['closeWorkspaceWithSavedChanges'];
   conditionToEdit?: ConditionDataTableRow;
   isEditing?: boolean;
   isSubmittingForm: boolean;
@@ -119,7 +129,7 @@ const ConditionsWidget: React.FC<ConditionsWidgetProps> = ({
     };
 
     try {
-      await createCondition(payload);
+      const response = await createCondition(payload);
       await mutate();
 
       showSnackbar({
@@ -128,7 +138,7 @@ const ConditionsWidget: React.FC<ConditionsWidgetProps> = ({
         title: t('conditionSaved', 'Condition saved'),
       });
 
-      closeWorkspaceWithSavedChanges();
+      closeWorkspaceWithSavedChanges(response.data);
     } catch (error) {
       setIsSubmittingForm(false);
       setErrorCreating(error);
@@ -161,7 +171,7 @@ const ConditionsWidget: React.FC<ConditionsWidgetProps> = ({
     };
 
     try {
-      await updateCondition(conditionToEdit?.id, payload);
+      const response = await updateCondition(conditionToEdit?.id, payload);
       await mutate();
 
       showSnackbar({
@@ -170,7 +180,7 @@ const ConditionsWidget: React.FC<ConditionsWidgetProps> = ({
         title: t('conditionUpdated', 'Condition updated'),
       });
 
-      closeWorkspaceWithSavedChanges();
+      closeWorkspaceWithSavedChanges(response.data);
     } catch (error) {
       setIsSubmittingForm(false);
       setErrorUpdating(error);

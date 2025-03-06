@@ -159,7 +159,7 @@ export async function createCondition(payload: FormFields) {
     },
   };
 
-  const res = await openmrsFetch(url, {
+  const res = await openmrsFetch<Condition>(url, {
     headers: {
       'Content-Type': 'application/json',
     },
