@@ -3693,6 +3693,46 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@csaude/esm-patient-allergies-app@workspace:packages/esm-patient-allergies-app":
+  version: 0.0.0-use.local
+  resolution: "@csaude/esm-patient-allergies-app@workspace:packages/esm-patient-allergies-app"
+  dependencies:
+    "@carbon/react": "npm:^1.12.0"
+    "@openmrs/esm-patient-common-lib": "workspace:*"
+    lodash-es: "npm:^4.17.21"
+    webpack: "npm:^5.94.0"
+  peerDependencies:
+    "@openmrs/esm-framework": 6.x
+    "@openmrs/esm-patient-common-lib": 9.x
+    dayjs: 1.x
+    react: ^18.2.0
+    react-i18next: 11.x
+    react-router-dom: 6.x
+    rxjs: 6.x
+    swr: 2.x
+  languageName: unknown
+  linkType: soft
+
+"@csaude/esm-patient-conditions-app@workspace:packages/esm-patient-conditions-app":
+  version: 0.0.0-use.local
+  resolution: "@csaude/esm-patient-conditions-app@workspace:packages/esm-patient-conditions-app"
+  dependencies:
+    "@carbon/react": "npm:^1.12.0"
+    "@openmrs/esm-patient-common-lib": "workspace:*"
+    lodash-es: "npm:^4.17.21"
+    webpack: "npm:^5.94.0"
+  peerDependencies:
+    "@openmrs/esm-framework": 6.x
+    "@openmrs/esm-patient-common-lib": 9.x
+    dayjs: 1.x
+    react: 18.x
+    react-i18next: 11.x
+    react-router-dom: 6.x
+    rxjs: 6.x
+    swr: 2.x
+  languageName: unknown
+  linkType: soft
+
 "@csaude/esm-patient-forms-app@workspace:packages/esm-patient-forms-app":
   version: 0.0.0-use.local
   resolution: "@csaude/esm-patient-forms-app@workspace:packages/esm-patient-forms-app"
@@ -5906,26 +5946,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@openmrs/esm-patient-allergies-app@workspace:packages/esm-patient-allergies-app":
-  version: 0.0.0-use.local
-  resolution: "@openmrs/esm-patient-allergies-app@workspace:packages/esm-patient-allergies-app"
-  dependencies:
-    "@carbon/react": "npm:^1.12.0"
-    "@openmrs/esm-patient-common-lib": "workspace:*"
-    lodash-es: "npm:^4.17.21"
-    webpack: "npm:^5.94.0"
-  peerDependencies:
-    "@openmrs/esm-framework": 6.x
-    "@openmrs/esm-patient-common-lib": 9.x
-    dayjs: 1.x
-    react: ^18.2.0
-    react-i18next: 11.x
-    react-router-dom: 6.x
-    rxjs: 6.x
-    swr: 2.x
-  languageName: unknown
-  linkType: soft
-
 "@openmrs/esm-patient-attachments-app@workspace:packages/esm-patient-attachments-app":
   version: 0.0.0-use.local
   resolution: "@openmrs/esm-patient-attachments-app@workspace:packages/esm-patient-attachments-app"
@@ -6070,26 +6090,6 @@ __metadata:
     "@openmrs/esm-framework": 6.x
     react: 18.x
     single-spa: 6.x
-  languageName: unknown
-  linkType: soft
-
-"@openmrs/esm-patient-conditions-app@workspace:packages/esm-patient-conditions-app":
-  version: 0.0.0-use.local
-  resolution: "@openmrs/esm-patient-conditions-app@workspace:packages/esm-patient-conditions-app"
-  dependencies:
-    "@carbon/react": "npm:^1.12.0"
-    "@openmrs/esm-patient-common-lib": "workspace:*"
-    lodash-es: "npm:^4.17.21"
-    webpack: "npm:^5.94.0"
-  peerDependencies:
-    "@openmrs/esm-framework": 6.x
-    "@openmrs/esm-patient-common-lib": 9.x
-    dayjs: 1.x
-    react: 18.x
-    react-i18next: 11.x
-    react-router-dom: 6.x
-    rxjs: 6.x
-    swr: 2.x
   languageName: unknown
   linkType: soft
 
