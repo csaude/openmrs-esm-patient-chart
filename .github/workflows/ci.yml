@@ -49,7 +49,7 @@ jobs:
         run: yarn verify
 
       - name: 🏗️ Run build
-        run: yarn turbo run build --color --concurrency=5
+        run: yarn turbo run build --filter='@csaude/*' --color --concurrency=5
 
   pre_release:
     runs-on: ubuntu-latest
@@ -87,7 +87,7 @@ jobs:
         run: yarn workspaces foreach --all --topological --exclude @openmrs/esm-patient-chart version "$(node -e "console.log(require('semver').inc(require('./package.json').version, 'patch'))")-pre.${{ github.run_number }}"
 
       - name: 🏗️ Build
-        run: yarn turbo run build --color --concurrency=5
+        run: yarn turbo run build --filter='@csaude/*' --color --concurrency=5
 
       - name: 🔧 Configure Git
         run: git config user.email "info@openmrs.org" && git config user.name "OpenMRS CI"
@@ -112,7 +112,7 @@ jobs:
 
     needs: pre_release
 
-    if: ${{ github.event_name == 'push' }}
+    if: false
 
     steps:
       - name: 🚀 Trigger RefApp Build
@@ -156,7 +156,7 @@ jobs:
           server-token: ${{ env.TURBO_TOKEN }}
 
       - name: 🏗️ Build
-        run: yarn turbo run build --color --concurrency=5
+        run: yarn turbo run build --filter='@csaude/*' --color --concurrency=5
 
       - name: 📢 Publish
         run: yarn config set npmAuthToken "${NODE_AUTH_TOKEN}" && yarn run ci:publish
