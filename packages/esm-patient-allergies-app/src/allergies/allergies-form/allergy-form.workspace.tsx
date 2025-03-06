@@ -285,7 +285,16 @@ function AllergyForm(props: AllergyFormProps) {
             )
             .finally(() => abortController.abort());
     },
-    [otherConceptUuid, patientUuid, t, mutate, allergy?.id, closeWorkspace, formContext],
+    [
+      otherConceptUuid,
+      formContext,
+      patientUuid,
+      allergy?.id,
+      mutate,
+      closeWorkspace,
+      t,
+      closeWorkspaceWithSavedChanges,
+    ],
   );
 
   return (
